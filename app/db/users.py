@@ -1,10 +1,9 @@
-from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
-from app.db.posts import Post
-from sqlalchemy.orm import relationship
-from app.db.db import Base
 from fastapi import Depends
+from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.db import get_async_session
+from sqlalchemy.orm import relationship
+
+from app.db.db import Base, get_async_session
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
