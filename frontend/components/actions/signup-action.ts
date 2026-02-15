@@ -4,6 +4,9 @@ import {
     registerRegisterAuthRegisterPost,
     RegisterRegisterAuthRegisterPostData,
 } from "@/client";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { cookies } from "next/headers";
+
 export async function register(formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -15,8 +18,14 @@ export async function register(formData: FormData) {
 export async function login(formData: FormData) {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
-    let response = authJwtLoginAuthJwtLoginPost({
+    let response = await authJwtLoginAuthJwtLoginPost({
         body: { username, password },
     });
-    console.log(await response)
+    let token = response.data?.access_token;
+    let cookieStore = await cookies()
+    if (token) {
+        cookieStore.set("access_token", token)
+    }
+    let my = await cookieStore.get("access_token")?.value
+    console.log(my);
 }
