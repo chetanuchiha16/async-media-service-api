@@ -38,6 +38,7 @@ export function LoginForm({
                   id="username"
                   type="username"
                   placeholder="m@example.com"
+                  name="username"
                   required
                 />
               </Field>
@@ -51,7 +52,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" name="password" required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
