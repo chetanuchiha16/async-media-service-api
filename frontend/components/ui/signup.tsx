@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { register } from "@/components/actions/signup-action";
 import { CardHeader, CardTitle } from "@/components/ui/card";
 import { InputGroup, InputGroupInput, InputGroupAddon } from "./input-group";
-import { Field, FieldLabel, FieldGroup } from "./field";
+import { Field, FieldLabel, FieldGroup, FieldDescription } from "./field";
 export function SignUp() {
     return (
         <div className="flex flex-col gap-6">
@@ -29,6 +29,10 @@ export function SignUp() {
                                 ></Input>
                             </Field>
                             <Button>Submit</Button>
+                            <FieldDescription className="text-center">
+                                Already Have an account?{" "}
+                                <a href="/login">Login</a>
+                            </FieldDescription>
                         </FieldGroup>
                     </form>
                 </CardContent>
