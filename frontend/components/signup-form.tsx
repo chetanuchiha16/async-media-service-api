@@ -1,8 +1,10 @@
 "use client"
 
-import * as React from "react"
 import { useRouter } from "next/navigation"
-import { EnvelopeIcon, LockIcon, SpinnerIcon } from "@phosphor-icons/react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { EnvelopeIcon, SpinnerIcon } from "@phosphor-icons/react"
 
 import { registerRegisterAuthRegisterPost } from "@/client/sdk.gen"
 import { Button } from "@/components/ui/button"
@@ -22,85 +24,80 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
+const signupSchema = z
+  .object({
+    email: z
+      .string()
+      .min(1, "Email is required")
+      .email("Please enter a valid email address"),
+    password: z
+      .string()
+      .min(1, "Password is required")
+      .min(8, "Password must be at least 8 characters"),
+    confirmPassword: z.string().min(1, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  })
+
+type SignupFormValues = z.infer<typeof signupSchema>
+
 export function SignupForm() {
   const router = useRouter()
-  const [email, setEmail] = React.useState("")
-  const [password, setPassword] = React.useState("")
-  const [confirmPassword, setConfirmPassword] = React.useState("")
-  const [error, setError] = React.useState<string | null>(null)
-  const [fieldErrors, setFieldErrors] = React.useState<{
-    email?: string
-    password?: string
-    confirmPassword?: string
-  }>({})
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [success, setSuccess] = React.useState(false)
 
-  function validate(): boolean {
-    const errors: typeof fieldErrors = {}
+  const {
+    register,
+    handleSubmit,
+    setError,
+    getValues,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm<SignupFormValues>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  })
 
-    if (!email) {
-      errors.email = "Email is required"
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.email = "Please enter a valid email address"
-    }
-
-    if (!password) {
-      errors.password = "Password is required"
-    } else if (password.length < 8) {
-      errors.password = "Password must be at least 8 characters"
-    }
-
-    if (!confirmPassword) {
-      errors.confirmPassword = "Please confirm your password"
-    } else if (password !== confirmPassword) {
-      errors.confirmPassword = "Passwords do not match"
-    }
-
-    setFieldErrors(errors)
-    return Object.keys(errors).length === 0
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setError(null)
-
-    if (!validate()) return
-
-    setIsLoading(true)
-
+  async function onSubmit(values: SignupFormValues) {
     try {
       const { data, error: apiError } =
         await registerRegisterAuthRegisterPost({
           body: {
-            email,
-            password,
+            email: values.email,
+            password: values.password,
           },
         })
 
       if (apiError) {
-        const detail = (apiError as { detail?: string | { [key: string]: string } }).detail
+        const detail = (
+          apiError as { detail?: string | { [key: string]: string } }
+        ).detail
         if (typeof detail === "string") {
-          setError(detail)
+          setError("root", { message: detail })
         } else if (detail && typeof detail === "object") {
-          setError(Object.values(detail).join(", "))
+          setError("root", { message: Object.values(detail).join(", ") })
         } else {
-          setError("Registration failed. Please try again.")
+          setError("root", { message: "Registration failed. Please try again." })
         }
         return
       }
 
-      if (data) {
-        setSuccess(true)
+      if (!data) {
+        setError("root", {
+          message: "An unexpected error occurred. Please try again.",
+        })
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.")
-    } finally {
-      setIsLoading(false)
+      setError("root", {
+        message: "An unexpected error occurred. Please try again.",
+      })
     }
   }
 
-  if (success) {
+  if (isSubmitSuccessful && !errors.root) {
     return (
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
@@ -110,8 +107,10 @@ export function SignupForm() {
           <CardTitle className="text-xl">Check your email</CardTitle>
           <CardDescription>
             We sent a verification link to{" "}
-            <span className="text-foreground font-medium">{email}</span>. Please
-            verify your email to get started.
+            <span className="text-foreground font-medium">
+              {getValues("email")}
+            </span>
+            . Please verify your email to get started.
           </CardDescription>
         </CardHeader>
         <CardFooter className="justify-center">
@@ -132,14 +131,14 @@ export function SignupForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <FieldGroup>
-            {error && (
+            {errors.root && (
               <div
                 role="alert"
                 className="bg-destructive/10 text-destructive rounded-lg px-4 py-3 text-sm"
               >
-                {error}
+                {errors.root.message}
               </div>
             )}
 
@@ -149,19 +148,13 @@ export function SignupForm() {
                 id="signup-email"
                 type="email"
                 placeholder="you@example.com"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                  if (fieldErrors.email)
-                    setFieldErrors((prev) => ({ ...prev, email: undefined }))
-                }}
-                aria-invalid={!!fieldErrors.email}
-                disabled={isLoading}
+                aria-invalid={!!errors.email}
+                disabled={isSubmitting}
                 autoComplete="email"
-                required
+                {...register("email")}
               />
-              {fieldErrors.email && (
-                <FieldError>{fieldErrors.email}</FieldError>
+              {errors.email && (
+                <FieldError>{errors.email.message}</FieldError>
               )}
             </Field>
 
@@ -171,22 +164,13 @@ export function SignupForm() {
                 id="signup-password"
                 type="password"
                 placeholder="At least 8 characters"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value)
-                  if (fieldErrors.password)
-                    setFieldErrors((prev) => ({
-                      ...prev,
-                      password: undefined,
-                    }))
-                }}
-                aria-invalid={!!fieldErrors.password}
-                disabled={isLoading}
+                aria-invalid={!!errors.password}
+                disabled={isSubmitting}
                 autoComplete="new-password"
-                required
+                {...register("password")}
               />
-              {fieldErrors.password && (
-                <FieldError>{fieldErrors.password}</FieldError>
+              {errors.password && (
+                <FieldError>{errors.password.message}</FieldError>
               )}
             </Field>
 
@@ -198,29 +182,23 @@ export function SignupForm() {
                 id="signup-confirm-password"
                 type="password"
                 placeholder="Re-enter your password"
-                value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value)
-                  if (fieldErrors.confirmPassword)
-                    setFieldErrors((prev) => ({
-                      ...prev,
-                      confirmPassword: undefined,
-                    }))
-                }}
-                aria-invalid={!!fieldErrors.confirmPassword}
-                disabled={isLoading}
+                aria-invalid={!!errors.confirmPassword}
+                disabled={isSubmitting}
                 autoComplete="new-password"
-                required
+                {...register("confirmPassword")}
               />
-              {fieldErrors.confirmPassword && (
-                <FieldError>{fieldErrors.confirmPassword}</FieldError>
+              {errors.confirmPassword && (
+                <FieldError>{errors.confirmPassword.message}</FieldError>
               )}
             </Field>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? (
                 <>
-                  <SpinnerIcon className="animate-spin" data-icon="inline-start" />
+                  <SpinnerIcon
+                    className="animate-spin"
+                    data-icon="inline-start"
+                  />
                   Creating account...
                 </>
               ) : (
@@ -233,7 +211,7 @@ export function SignupForm() {
       <CardFooter className="justify-center">
         <p className="text-muted-foreground text-sm">
           Already have an account?{" "}
-          <a href="/login" className="text-primary hover:underline font-medium">
+          <a href="/login" className="text-primary font-medium hover:underline">
             Sign in
           </a>
         </p>
