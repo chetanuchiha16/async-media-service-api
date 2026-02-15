@@ -14,6 +14,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { login } from "./actions/signup-action"
 
 export function LoginForm({
   className,
@@ -29,13 +30,13 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form action={login}>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="username">Username</FieldLabel>
                 <Input
-                  id="email"
-                  type="email"
+                  id="username"
+                  type="username"
                   placeholder="m@example.com"
                   required
                 />
