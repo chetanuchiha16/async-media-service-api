@@ -7,6 +7,7 @@ import {
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { FormState } from "react-hook-form";
 
 export async function register(formData: FormData) {
     const email = formData.get("email") as string;
@@ -16,9 +17,10 @@ export async function register(formData: FormData) {
     });
 }
 
-export async function login(formData: FormData) {
+export async function login(prevState: any, formData: FormData) {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
+
     let response = await authJwtLoginAuthJwtLoginPost({
         body: { username, password },
     });
@@ -27,9 +29,8 @@ export async function login(formData: FormData) {
     if (token) {
         cookieStore.set("access_token", token);
     }
-    let my = await cookieStore.get("access_token")?.value;
-    if (!response.error) {
-        redirect("/posts");
+    if (response.error) {
+        return { error: "Incorrect Credentials" };
     }
-    console.log(my);
+    return { message: "Login Successful" };
 }
