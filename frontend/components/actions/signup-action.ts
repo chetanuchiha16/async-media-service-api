@@ -6,6 +6,7 @@ import {
 } from "@/client";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function register(formData: FormData) {
     const email = formData.get("email") as string;
@@ -22,10 +23,13 @@ export async function login(formData: FormData) {
         body: { username, password },
     });
     let token = response.data?.access_token;
-    let cookieStore = await cookies()
+    let cookieStore = await cookies();
     if (token) {
-        cookieStore.set("access_token", token)
+        cookieStore.set("access_token", token);
     }
-    let my = await cookieStore.get("access_token")?.value
+    let my = await cookieStore.get("access_token")?.value;
+    if (!response.error) {
+        redirect("/posts");
+    }
     console.log(my);
 }
