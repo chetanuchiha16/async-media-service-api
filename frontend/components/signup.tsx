@@ -1,11 +1,20 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { register } from "@/components/actions/signup-action";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Field, FieldLabel, FieldGroup, FieldDescription } from "@/components/ui/field";
+import {
+    Field,
+    FieldLabel,
+    FieldGroup,
+    FieldDescription,
+} from "@/components/ui/field";
+import { useActionState } from "react";
+
 export function SignUp() {
+    const [errorMessage, formAction] = useActionState(register, undefined);
     return (
         <div className="flex flex-col gap-6">
             <Card>
@@ -16,7 +25,7 @@ export function SignUp() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form action={register}>
+                    <form action={formAction}>
                         <FieldGroup>
                             <Field>
                                 <FieldLabel>Email</FieldLabel>
@@ -37,6 +46,8 @@ export function SignUp() {
                         </FieldGroup>
                     </form>
                 </CardContent>
+
+                {errorMessage && <CardFooter className="text-red-400">{errorMessage.error}</CardFooter>}
             </Card>
         </div>
     );

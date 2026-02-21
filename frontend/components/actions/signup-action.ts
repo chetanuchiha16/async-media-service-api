@@ -5,12 +5,17 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { FormState } from "react-hook-form";
 
-export async function register(formData: FormData) {
+export async function register(prevState: any, formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     let response = await registerRegister({
         body: { email, password },
     });
+    if (response.error) {
+        return { error: JSON.stringify(response.error.detail) };
+    } else {
+        return { message: "signup successfull" };
+    }
 }
 
 export async function login(prevState: any, formData: FormData) {
