@@ -47,7 +47,11 @@ export function SignUp() {
                     </form>
                 </CardContent>
 
-                {errorMessage && <CardFooter className="text-red-400">{errorMessage.error}</CardFooter>}
+                {errorMessage && (
+                    <CardFooter className="text-red-400">
+                        {errorMessage.error as string}
+                    </CardFooter>
+                )}
             </Card>
         </div>
     );

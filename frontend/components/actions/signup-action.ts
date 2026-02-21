@@ -12,7 +12,7 @@ export async function register(prevState: any, formData: FormData) {
         body: { email, password },
     });
     if (response.error) {
-        return { error: JSON.stringify(response.error.detail) };
+        return { error: response.error.detail };
     } else {
         return { message: "signup successfull" };
     }
@@ -31,7 +31,7 @@ export async function login(prevState: any, formData: FormData) {
         cookieStore.set("access_token", token);
     }
     if (response.error) {
-        return { error: "Incorrect Credentials" };
+        return { error: response.error.detail };
     }
     return { message: "Login Successful" };
 }

@@ -83,7 +83,7 @@ export function LoginForm({
                 </CardContent>
                 {errorMessage && (
                     <CardFooter className="text-red-500">
-                        {errorMessage.message}
+                        {errorMessage.error as string}
                     </CardFooter>
                 )}
             </Card>
