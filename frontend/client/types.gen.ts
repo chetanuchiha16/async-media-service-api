@@ -19,9 +19,9 @@ export type BearerResponse = {
 };
 
 /**
- * Body_auth_jwt_login_auth_jwt_login_post
+ * Body_auth:jwt.login
  */
-export type BodyAuthJwtLoginAuthJwtLoginPost = {
+export type BodyAuthJwtLogin = {
     /**
      * Grant Type
      */
@@ -49,9 +49,9 @@ export type BodyAuthJwtLoginAuthJwtLoginPost = {
 };
 
 /**
- * Body_reset_forgot_password_auth_forgot_password_post
+ * Body_reset:forgot_password
  */
-export type BodyResetForgotPasswordAuthForgotPasswordPost = {
+export type BodyResetForgotPassword = {
     /**
      * Email
      */
@@ -59,9 +59,9 @@ export type BodyResetForgotPasswordAuthForgotPasswordPost = {
 };
 
 /**
- * Body_reset_reset_password_auth_reset_password_post
+ * Body_reset:reset_password
  */
-export type BodyResetResetPasswordAuthResetPasswordPost = {
+export type BodyResetResetPassword = {
     /**
      * Token
      */
@@ -73,9 +73,9 @@ export type BodyResetResetPasswordAuthResetPasswordPost = {
 };
 
 /**
- * Body_upload_file_api_posts_upload_post
+ * Body_upload_file
  */
-export type BodyUploadFileApiPostsUploadPost = {
+export type BodyUploadFile = {
     /**
      * Caption
      */
@@ -87,9 +87,9 @@ export type BodyUploadFileApiPostsUploadPost = {
 };
 
 /**
- * Body_verify_request_token_auth_request_verify_token_post
+ * Body_verify:request-token
  */
-export type BodyVerifyRequestTokenAuthRequestVerifyTokenPost = {
+export type BodyVerifyRequestToken = {
     /**
      * Email
      */
@@ -97,9 +97,9 @@ export type BodyVerifyRequestTokenAuthRequestVerifyTokenPost = {
 };
 
 /**
- * Body_verify_verify_auth_verify_post
+ * Body_verify:verify
  */
-export type BodyVerifyVerifyAuthVerifyPost = {
+export type BodyVerifyVerify = {
     /**
      * Token
      */
@@ -254,32 +254,32 @@ export type ValidationError = {
     type: string;
 };
 
-export type UploadFileApiPostsUploadPostData = {
-    body: BodyUploadFileApiPostsUploadPost;
+export type UploadFileData = {
+    body: BodyUploadFile;
     path?: never;
     query?: never;
     url: '/api/posts/upload';
 };
 
-export type UploadFileApiPostsUploadPostErrors = {
+export type UploadFileErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type UploadFileApiPostsUploadPostError = UploadFileApiPostsUploadPostErrors[keyof UploadFileApiPostsUploadPostErrors];
+export type UploadFileError = UploadFileErrors[keyof UploadFileErrors];
 
-export type UploadFileApiPostsUploadPostResponses = {
+export type UploadFileResponses = {
     /**
      * Successful Response
      */
     200: PostModel;
 };
 
-export type UploadFileApiPostsUploadPostResponse = UploadFileApiPostsUploadPostResponses[keyof UploadFileApiPostsUploadPostResponses];
+export type UploadFileResponse = UploadFileResponses[keyof UploadFileResponses];
 
-export type GetFeedApiPostsFeedGetData = {
+export type GetFeedData = {
     body?: never;
     path?: never;
     query: {
@@ -291,27 +291,27 @@ export type GetFeedApiPostsFeedGetData = {
     url: '/api/posts/feed';
 };
 
-export type GetFeedApiPostsFeedGetErrors = {
+export type GetFeedErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type GetFeedApiPostsFeedGetError = GetFeedApiPostsFeedGetErrors[keyof GetFeedApiPostsFeedGetErrors];
+export type GetFeedError = GetFeedErrors[keyof GetFeedErrors];
 
-export type GetFeedApiPostsFeedGetResponses = {
+export type GetFeedResponses = {
     /**
-     * Response Get Feed Api Posts Feed Get
+     * Response Get Feed
      *
      * Successful Response
      */
     200: Array<PostModel>;
 };
 
-export type GetFeedApiPostsFeedGetResponse = GetFeedApiPostsFeedGetResponses[keyof GetFeedApiPostsFeedGetResponses];
+export type GetFeedResponse = GetFeedResponses[keyof GetFeedResponses];
 
-export type DeleteFeedApiPostsDeleteDeleteData = {
+export type DeleteFeedData = {
     body?: never;
     path?: never;
     query: {
@@ -323,32 +323,32 @@ export type DeleteFeedApiPostsDeleteDeleteData = {
     url: '/api/posts/delete';
 };
 
-export type DeleteFeedApiPostsDeleteDeleteErrors = {
+export type DeleteFeedErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type DeleteFeedApiPostsDeleteDeleteError = DeleteFeedApiPostsDeleteDeleteErrors[keyof DeleteFeedApiPostsDeleteDeleteErrors];
+export type DeleteFeedError = DeleteFeedErrors[keyof DeleteFeedErrors];
 
-export type DeleteFeedApiPostsDeleteDeleteResponses = {
+export type DeleteFeedResponses = {
     /**
      * Successful Response
      */
     200: PostModel;
 };
 
-export type DeleteFeedApiPostsDeleteDeleteResponse = DeleteFeedApiPostsDeleteDeleteResponses[keyof DeleteFeedApiPostsDeleteDeleteResponses];
+export type DeleteFeedResponse = DeleteFeedResponses[keyof DeleteFeedResponses];
 
-export type AuthJwtLoginAuthJwtLoginPostData = {
-    body: BodyAuthJwtLoginAuthJwtLoginPost;
+export type AuthJwtLoginData = {
+    body: BodyAuthJwtLogin;
     path?: never;
     query?: never;
     url: '/auth/jwt/login';
 };
 
-export type AuthJwtLoginAuthJwtLoginPostErrors = {
+export type AuthJwtLoginErrors = {
     /**
      * Bad Request
      */
@@ -359,46 +359,46 @@ export type AuthJwtLoginAuthJwtLoginPostErrors = {
     422: HttpValidationError;
 };
 
-export type AuthJwtLoginAuthJwtLoginPostError = AuthJwtLoginAuthJwtLoginPostErrors[keyof AuthJwtLoginAuthJwtLoginPostErrors];
+export type AuthJwtLoginError = AuthJwtLoginErrors[keyof AuthJwtLoginErrors];
 
-export type AuthJwtLoginAuthJwtLoginPostResponses = {
+export type AuthJwtLoginResponses = {
     /**
      * Successful Response
      */
     200: BearerResponse;
 };
 
-export type AuthJwtLoginAuthJwtLoginPostResponse = AuthJwtLoginAuthJwtLoginPostResponses[keyof AuthJwtLoginAuthJwtLoginPostResponses];
+export type AuthJwtLoginResponse = AuthJwtLoginResponses[keyof AuthJwtLoginResponses];
 
-export type AuthJwtLogoutAuthJwtLogoutPostData = {
+export type AuthJwtLogoutData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/auth/jwt/logout';
 };
 
-export type AuthJwtLogoutAuthJwtLogoutPostErrors = {
+export type AuthJwtLogoutErrors = {
     /**
      * Missing token or inactive user.
      */
     401: unknown;
 };
 
-export type AuthJwtLogoutAuthJwtLogoutPostResponses = {
+export type AuthJwtLogoutResponses = {
     /**
      * Successful Response
      */
     200: unknown;
 };
 
-export type RegisterRegisterAuthRegisterPostData = {
+export type RegisterRegisterData = {
     body: UserCreate;
     path?: never;
     query?: never;
     url: '/auth/register';
 };
 
-export type RegisterRegisterAuthRegisterPostErrors = {
+export type RegisterRegisterErrors = {
     /**
      * Bad Request
      */
@@ -409,48 +409,48 @@ export type RegisterRegisterAuthRegisterPostErrors = {
     422: HttpValidationError;
 };
 
-export type RegisterRegisterAuthRegisterPostError = RegisterRegisterAuthRegisterPostErrors[keyof RegisterRegisterAuthRegisterPostErrors];
+export type RegisterRegisterError = RegisterRegisterErrors[keyof RegisterRegisterErrors];
 
-export type RegisterRegisterAuthRegisterPostResponses = {
+export type RegisterRegisterResponses = {
     /**
      * Successful Response
      */
     201: UserRead;
 };
 
-export type RegisterRegisterAuthRegisterPostResponse = RegisterRegisterAuthRegisterPostResponses[keyof RegisterRegisterAuthRegisterPostResponses];
+export type RegisterRegisterResponse = RegisterRegisterResponses[keyof RegisterRegisterResponses];
 
-export type VerifyRequestTokenAuthRequestVerifyTokenPostData = {
-    body: BodyVerifyRequestTokenAuthRequestVerifyTokenPost;
+export type VerifyRequestTokenData = {
+    body: BodyVerifyRequestToken;
     path?: never;
     query?: never;
     url: '/auth/request-verify-token';
 };
 
-export type VerifyRequestTokenAuthRequestVerifyTokenPostErrors = {
+export type VerifyRequestTokenErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type VerifyRequestTokenAuthRequestVerifyTokenPostError = VerifyRequestTokenAuthRequestVerifyTokenPostErrors[keyof VerifyRequestTokenAuthRequestVerifyTokenPostErrors];
+export type VerifyRequestTokenError = VerifyRequestTokenErrors[keyof VerifyRequestTokenErrors];
 
-export type VerifyRequestTokenAuthRequestVerifyTokenPostResponses = {
+export type VerifyRequestTokenResponses = {
     /**
      * Successful Response
      */
     202: unknown;
 };
 
-export type VerifyVerifyAuthVerifyPostData = {
-    body: BodyVerifyVerifyAuthVerifyPost;
+export type VerifyVerifyData = {
+    body: BodyVerifyVerify;
     path?: never;
     query?: never;
     url: '/auth/verify';
 };
 
-export type VerifyVerifyAuthVerifyPostErrors = {
+export type VerifyVerifyErrors = {
     /**
      * Bad Request
      */
@@ -461,48 +461,48 @@ export type VerifyVerifyAuthVerifyPostErrors = {
     422: HttpValidationError;
 };
 
-export type VerifyVerifyAuthVerifyPostError = VerifyVerifyAuthVerifyPostErrors[keyof VerifyVerifyAuthVerifyPostErrors];
+export type VerifyVerifyError = VerifyVerifyErrors[keyof VerifyVerifyErrors];
 
-export type VerifyVerifyAuthVerifyPostResponses = {
+export type VerifyVerifyResponses = {
     /**
      * Successful Response
      */
     200: UserRead;
 };
 
-export type VerifyVerifyAuthVerifyPostResponse = VerifyVerifyAuthVerifyPostResponses[keyof VerifyVerifyAuthVerifyPostResponses];
+export type VerifyVerifyResponse = VerifyVerifyResponses[keyof VerifyVerifyResponses];
 
-export type ResetForgotPasswordAuthForgotPasswordPostData = {
-    body: BodyResetForgotPasswordAuthForgotPasswordPost;
+export type ResetForgotPasswordData = {
+    body: BodyResetForgotPassword;
     path?: never;
     query?: never;
     url: '/auth/forgot-password';
 };
 
-export type ResetForgotPasswordAuthForgotPasswordPostErrors = {
+export type ResetForgotPasswordErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type ResetForgotPasswordAuthForgotPasswordPostError = ResetForgotPasswordAuthForgotPasswordPostErrors[keyof ResetForgotPasswordAuthForgotPasswordPostErrors];
+export type ResetForgotPasswordError = ResetForgotPasswordErrors[keyof ResetForgotPasswordErrors];
 
-export type ResetForgotPasswordAuthForgotPasswordPostResponses = {
+export type ResetForgotPasswordResponses = {
     /**
      * Successful Response
      */
     202: unknown;
 };
 
-export type ResetResetPasswordAuthResetPasswordPostData = {
-    body: BodyResetResetPasswordAuthResetPasswordPost;
+export type ResetResetPasswordData = {
+    body: BodyResetResetPassword;
     path?: never;
     query?: never;
     url: '/auth/reset-password';
 };
 
-export type ResetResetPasswordAuthResetPasswordPostErrors = {
+export type ResetResetPasswordErrors = {
     /**
      * Bad Request
      */
@@ -513,46 +513,46 @@ export type ResetResetPasswordAuthResetPasswordPostErrors = {
     422: HttpValidationError;
 };
 
-export type ResetResetPasswordAuthResetPasswordPostError = ResetResetPasswordAuthResetPasswordPostErrors[keyof ResetResetPasswordAuthResetPasswordPostErrors];
+export type ResetResetPasswordError = ResetResetPasswordErrors[keyof ResetResetPasswordErrors];
 
-export type ResetResetPasswordAuthResetPasswordPostResponses = {
+export type ResetResetPasswordResponses = {
     /**
      * Successful Response
      */
     200: unknown;
 };
 
-export type UsersCurrentUserAuthMeGetData = {
+export type UsersCurrentUserData = {
     body?: never;
     path?: never;
     query?: never;
     url: '/auth/me';
 };
 
-export type UsersCurrentUserAuthMeGetErrors = {
+export type UsersCurrentUserErrors = {
     /**
      * Missing token or inactive user.
      */
     401: unknown;
 };
 
-export type UsersCurrentUserAuthMeGetResponses = {
+export type UsersCurrentUserResponses = {
     /**
      * Successful Response
      */
     200: UserRead;
 };
 
-export type UsersCurrentUserAuthMeGetResponse = UsersCurrentUserAuthMeGetResponses[keyof UsersCurrentUserAuthMeGetResponses];
+export type UsersCurrentUserResponse = UsersCurrentUserResponses[keyof UsersCurrentUserResponses];
 
-export type UsersPatchCurrentUserAuthMePatchData = {
+export type UsersPatchCurrentUserData = {
     body: UserUpdate;
     path?: never;
     query?: never;
     url: '/auth/me';
 };
 
-export type UsersPatchCurrentUserAuthMePatchErrors = {
+export type UsersPatchCurrentUserErrors = {
     /**
      * Bad Request
      */
@@ -567,18 +567,18 @@ export type UsersPatchCurrentUserAuthMePatchErrors = {
     422: HttpValidationError;
 };
 
-export type UsersPatchCurrentUserAuthMePatchError = UsersPatchCurrentUserAuthMePatchErrors[keyof UsersPatchCurrentUserAuthMePatchErrors];
+export type UsersPatchCurrentUserError = UsersPatchCurrentUserErrors[keyof UsersPatchCurrentUserErrors];
 
-export type UsersPatchCurrentUserAuthMePatchResponses = {
+export type UsersPatchCurrentUserResponses = {
     /**
      * Successful Response
      */
     200: UserRead;
 };
 
-export type UsersPatchCurrentUserAuthMePatchResponse = UsersPatchCurrentUserAuthMePatchResponses[keyof UsersPatchCurrentUserAuthMePatchResponses];
+export type UsersPatchCurrentUserResponse = UsersPatchCurrentUserResponses[keyof UsersPatchCurrentUserResponses];
 
-export type UsersDeleteUserAuthIdDeleteData = {
+export type UsersDeleteUserData = {
     body?: never;
     path: {
         /**
@@ -590,7 +590,7 @@ export type UsersDeleteUserAuthIdDeleteData = {
     url: '/auth/{id}';
 };
 
-export type UsersDeleteUserAuthIdDeleteErrors = {
+export type UsersDeleteUserErrors = {
     /**
      * Missing token or inactive user.
      */
@@ -609,18 +609,18 @@ export type UsersDeleteUserAuthIdDeleteErrors = {
     422: HttpValidationError;
 };
 
-export type UsersDeleteUserAuthIdDeleteError = UsersDeleteUserAuthIdDeleteErrors[keyof UsersDeleteUserAuthIdDeleteErrors];
+export type UsersDeleteUserError = UsersDeleteUserErrors[keyof UsersDeleteUserErrors];
 
-export type UsersDeleteUserAuthIdDeleteResponses = {
+export type UsersDeleteUserResponses = {
     /**
      * Successful Response
      */
     204: void;
 };
 
-export type UsersDeleteUserAuthIdDeleteResponse = UsersDeleteUserAuthIdDeleteResponses[keyof UsersDeleteUserAuthIdDeleteResponses];
+export type UsersDeleteUserResponse = UsersDeleteUserResponses[keyof UsersDeleteUserResponses];
 
-export type UsersUserAuthIdGetData = {
+export type UsersUserData = {
     body?: never;
     path: {
         /**
@@ -632,7 +632,7 @@ export type UsersUserAuthIdGetData = {
     url: '/auth/{id}';
 };
 
-export type UsersUserAuthIdGetErrors = {
+export type UsersUserErrors = {
     /**
      * Missing token or inactive user.
      */
@@ -651,18 +651,18 @@ export type UsersUserAuthIdGetErrors = {
     422: HttpValidationError;
 };
 
-export type UsersUserAuthIdGetError = UsersUserAuthIdGetErrors[keyof UsersUserAuthIdGetErrors];
+export type UsersUserError = UsersUserErrors[keyof UsersUserErrors];
 
-export type UsersUserAuthIdGetResponses = {
+export type UsersUserResponses = {
     /**
      * Successful Response
      */
     200: UserRead;
 };
 
-export type UsersUserAuthIdGetResponse = UsersUserAuthIdGetResponses[keyof UsersUserAuthIdGetResponses];
+export type UsersUserResponse = UsersUserResponses[keyof UsersUserResponses];
 
-export type UsersPatchUserAuthIdPatchData = {
+export type UsersPatchUserData = {
     body: UserUpdate;
     path: {
         /**
@@ -674,7 +674,7 @@ export type UsersPatchUserAuthIdPatchData = {
     url: '/auth/{id}';
 };
 
-export type UsersPatchUserAuthIdPatchErrors = {
+export type UsersPatchUserErrors = {
     /**
      * Bad Request
      */
@@ -697,13 +697,13 @@ export type UsersPatchUserAuthIdPatchErrors = {
     422: HttpValidationError;
 };
 
-export type UsersPatchUserAuthIdPatchError = UsersPatchUserAuthIdPatchErrors[keyof UsersPatchUserAuthIdPatchErrors];
+export type UsersPatchUserError = UsersPatchUserErrors[keyof UsersPatchUserErrors];
 
-export type UsersPatchUserAuthIdPatchResponses = {
+export type UsersPatchUserResponses = {
     /**
      * Successful Response
      */
     200: UserRead;
 };
 
-export type UsersPatchUserAuthIdPatchResponse = UsersPatchUserAuthIdPatchResponses[keyof UsersPatchUserAuthIdPatchResponses];
+export type UsersPatchUserResponse = UsersPatchUserResponses[keyof UsersPatchUserResponses];

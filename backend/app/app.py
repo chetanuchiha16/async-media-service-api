@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.routing import APIRoute
 from app.api import api_router
 from app.db.db import create_db_and_tables
 from app.schemas.users import UserCreate, UserRead, UserUpdate
@@ -14,8 +14,11 @@ async def lifespan(app: FastAPI):
     await create_db_and_tables()
     yield
 
+def custom_id(route: APIRoute):
+    return route.name
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, generate_unique_id_function=custom_id)
+
 origins = [
     "http://localhost:3000",
 ]
