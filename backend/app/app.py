@@ -6,7 +6,7 @@ from fastapi.routing import APIRoute
 
 from app.api import api_router
 from app.core.db import create_db_and_tables
-from app.users import auth_backend, fastapi_users
+from app.users.auth import auth_backend, fastapi_users
 from app.users.schema import UserCreate, UserRead, UserUpdate
 
 
