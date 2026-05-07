@@ -1,11 +1,10 @@
 from datetime import datetime, timezone
 from uuid import uuid4
 
+from app.core.db import Base
 from sqlalchemy import Column, DateTime, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
-
-from app.db.db import Base
 
 
 class Post(Base):

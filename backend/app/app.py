@@ -3,10 +3,11 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.routing import APIRoute
+
 from app.api import api_router
-from app.db.db import create_db_and_tables
-from app.schemas.users import UserCreate, UserRead, UserUpdate
+from app.core.db import create_db_and_tables
 from app.users import auth_backend, fastapi_users
+from app.users.schema import UserCreate, UserRead, UserUpdate
 
 
 @asynccontextmanager
@@ -14,8 +15,10 @@ async def lifespan(app: FastAPI):
     await create_db_and_tables()
     yield
 
+
 def custom_id(route: APIRoute):
     return route.name
+
 
 app = FastAPI(lifespan=lifespan, generate_unique_id_function=custom_id)
 

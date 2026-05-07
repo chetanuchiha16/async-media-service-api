@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from app.routers import post
+from app.post import router
 
 api_router = APIRouter()
 
-api_router.include_router(post.router, prefix="/posts", tags=["posts"])
+api_router.include_router(router.router, prefix="/posts", tags=["posts"])

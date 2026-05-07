@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from app.schemas.imagekit import ImageKitConfig
+from app.images.schema import ImageKitConfig
 
 
 class Settings(BaseSettings):

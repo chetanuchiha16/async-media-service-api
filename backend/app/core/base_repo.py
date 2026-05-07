@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.db import Base
+from app.core.db import Base
 
 
 class CrudBase[ModelType: Base, CreateSchemaType: BaseModel]:
