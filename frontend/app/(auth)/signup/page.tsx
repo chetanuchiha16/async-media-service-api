@@ -11,7 +11,7 @@ export default function page() {
             <div className="w-full max-w-md z-10 relative">
                 <div className="mb-8 text-center">
                     <h1 className="text-4xl font-bold tracking-tight mb-2">Create Account</h1>
-                    <p className="text-muted-foreground">Join Hinaverse and share your moments</p>
+                    <p className="text-muted-foreground">share your moments</p>
                 </div>
                 <SignUp />
             </div>

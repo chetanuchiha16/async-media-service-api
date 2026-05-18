@@ -10,7 +10,7 @@ export default function Page() {
       <div className="w-full max-w-md z-10 relative">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold tracking-tight mb-2">Welcome Back</h1>
-          <p className="text-muted-foreground">Sign in to continue to Hinaverse</p>
+          <p className="text-muted-foreground">Sign in to continue</p>
         </div>
         <LoginForm className="shadow-2xl shadow-primary/5 rounded-2xl border-white/10" />
       </div>
